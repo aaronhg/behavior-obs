@@ -1,26 +1,20 @@
-import React , { PropTypes } from 'react'
+import React, { PropTypes } from 'react'
 import DayButtons from './DayButtons'
 import DayGoTo from './DayGoTo'
 class Days extends React.Component {
-    constructor(){
+    constructor() {
         super()
-        this.state = {
-            start:1, // timestamp
-            end:1, // timestamp
-        }
+        this.onSelectDay = this.onSelectDay.bind(this)
     }
-    onSelectDay(...a){
-        console.log(...a)
-        // this.props.handleSelectDay()
+    onSelectDay(day) {
+        this.props.onChangeDay(day)
     }
     render() {
-        let { name, grade ,type} = this.props
-        let { start ,end } = this.state
+        let { name, grade, type } = this.props
         return (<div>
-                    debug[start:{start},end:{end}]
-                    <DayButtons onSelectDay={this.onSelectDay}/>
-                    <DayGoTo onSelectDay={this.onSelectDay} />
-            </div>)
+            <DayButtons onSelectDay={this.onSelectDay} />
+            <DayGoTo onSelectDay={this.onSelectDay} />
+        </div>)
     }
 }
 Days.PropTypes = {

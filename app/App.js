@@ -1,91 +1,75 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import List from './List'
 import Days from './Days'
 import AddButton from './AddButton'
-// todo : show info when save record is failed
-var url = "http://localhost:3000"
-async function getData(){
-    let i = await fetch(`${url}/items`)
-    let items = await i.json()
-    let e = await fetch(`${url}/entrys`)
-    let entrys = await e.json()
-    return {entrys,items}
-    // 抽象成 可以存 localstorge or restful
-}
-async function saveData(t,d){
-    let i = await fetch(`${url}/${t}s/${d.id}`, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(d)
-    })
-    d = await i.json()
-    return d
-    // id
-    // error handling
-}
+import model from './utils/model'
 class App extends React.Component {
     constructor() {
         super()
         this.handleAdd = this.handleAdd.bind(this)
         this.changeDay = this.changeDay.bind(this)
         this.updateEntry = this.updateEntry.bind(this)
+        var d = new Date()
         this.state = {
-            start: 1, // timestamp
-            end: 1, // timestamp
-            flag: 1, // timestamp
-            entrys : [],
-            items : [],
+            start: d.setHours(0, 0, 0, 0), // timestamp
+            end: d.setHours(24, 0, 0, 0), // timestamp
+            entrys: [],
+            items: [],
         }
         // todo : entry cache
     }
-    componentDidMount(){
-        getData().then((data)=>{
+    componentDidMount() {
+        let { start, end } = this.state
+        model.getData({ start, end }).then((data) => {
             this.setState(data)
         })
     }
     changeDay(day) {
-        this.setState({ day })
-        // let us know where is the new record should add to
+        var d = new Date()
+        d.setHours(day * 24)
+        var opt = {
+            start: d.setHours(0, 0, 0, 0), // timestamp
+            end: d.setHours(24, 0, 0, 0), // timestamp
+            entrys: [],
+        }
+        this.setState(opt)
+        model.getData(opt).then((data) => {
+            opt.entrys = data.entrys
+            this.setState(opt)
+        })
     }
     handleAdd(item) {
         const items = this.state.items
         item.id = App.nextTid++
-        items.push(item)
-        saveData("item",item)
-        this.setState({ items })
+        model.saveData("item", item).then(() => {
+            items.push(item)
+            this.setState({ items })
+        })
         // change flag & save a record
     }
-    updateEntry(tid,entry, grade) {
+    updateEntry(tid, entry, grade) {
         // find entry and update
         let { entrys } = this.state
-        if (!entry.id){
-            entry.updateAt = 0
+        if (!entry.id) {
+            entry.updateAt = (new Date()).getTime()
             entry.tid = tid
             entry.grade = grade
             entry.id = App.nextId++
             entrys.push(entry)
-            
-            saveData("entry",entry)
-            //post
+            model.saveData("entry", entry)
         }
         else {
-            for (let e of entrys) {
-                if (e.id === entry.id){
-                    e.grade = grade
-                    e.updateAt = (new Date()).getTime()
-                    saveData("entry",e)
-                    // put
-                }
-            }
+            entry.grade = grade
+            entry.updateAt = (new Date()).getTime()
+            model.saveData("entry", entry)
         }
         this.setState({ entrys })
         // todo : immutable ? rollback ?
     }
     render() {
         let { name, grade, type } = this.props
-        let { flag, entrys,items } = this.state
+        let { flag, entrys, items } = this.state
         return (<div>
             <Days onChangeDay={this.changeDay} />
             <List items={items} entrys={entrys} onEntryUpdate={this.updateEntry} />
@@ -94,7 +78,7 @@ class App extends React.Component {
     }
 }
 App.PropTypes = {
-    // grade: PropTypes.number,
+    grade: PropTypes.number,
 }
 App.nextTid = 4
 App.nextId = 13
