@@ -2,11 +2,11 @@ import React from 'react'
 class AddButton extends React.Component {
     constructor() {
         super()
+        this.handleAdd = this.handleAdd.bind(this)
+        this.handleDisplay = this.handleDisplay.bind(this)
         this.state = {
             DisplayBlock: false,
         }
-        this.handleAdd = this.handleAdd.bind(this)
-        this.handleDisplay = this.handleDisplay.bind(this)
     }
     handleDisplay(v) {
         if (v === false && this.state.DisplayBlock === true)
