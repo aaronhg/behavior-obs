@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
 import ItemGrade from './ItemGrade'
 class Item extends React.Component {
     render() {

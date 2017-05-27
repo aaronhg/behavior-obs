@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
 import DayButtons from './DayButtons'
 import DayGoTo from './DayGoTo'
 class Days extends React.Component {
