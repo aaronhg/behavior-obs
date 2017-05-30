@@ -1,4 +1,6 @@
 import React from 'react'
+import PropTypes from 'prop-types'
+
 class addModel extends React.Component {
     constructor() {
         super()
@@ -37,5 +39,11 @@ class addModel extends React.Component {
         </div>
         )
     }
+}
+addModel.propTypes = {
+    addItem: PropTypes.func.isRequired,
+    // defaultValue: PropTypes.arrayOf(PropTypes.object).isRequired,
+    // defaultValue: PropTypes.object,
+    // defaultValue: PropTypes.arrayOf(PropTypes.object),
 }
 export default addModel

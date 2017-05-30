@@ -1,4 +1,6 @@
-import React from 'react';
+import React from 'react'
+import PropTypes from 'prop-types'
+
 class ItemGrade extends React.Component {
   toggle(grade) {
     if (grade === this.props.grade)
@@ -16,5 +18,9 @@ class ItemGrade extends React.Component {
     </div>)
     // todo delegate event
   }
-};
+}
+ItemGrade.propTypes = {
+  onGradeChange: PropTypes.func,
+  grade: PropTypes.number,
+}
 export default ItemGrade

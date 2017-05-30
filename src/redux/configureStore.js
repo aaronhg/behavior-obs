@@ -3,9 +3,14 @@ import ReduxLogger from 'redux-logger'
 import rootReducer from './reducers'
 
 export default function configureStore() {
-    // const store = createStore(combineReducers({
-    //     ...rootReducer,
-    // }))
-    const store = applyMiddleware(ReduxLogger)(createStore)(combineReducers(rootReducer))
+    // const store = applyMiddleware(ReduxLogger)(createStore)(combineReducers(rootReducer))
+    const store = createStore(
+        combineReducers(
+            rootReducer,
+        ),
+        applyMiddleware(
+                ReduxLogger,
+            )
+        )
     return store
 }

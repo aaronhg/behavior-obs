@@ -1,5 +1,8 @@
 import React from 'react'
+import PropTypes from 'prop-types'
+
 import Item from './Item';
+
 class List extends React.Component {
     render() {
         let { entrys, items } = this.props
@@ -7,13 +10,15 @@ class List extends React.Component {
             {items ? items.map(item => {
                 let es = entrys.filter(e => item.id === e.tid)
                 let entry = (es.length) ? es[0] : {}
-                return <Item key={item.name} item={item} entry={entry} onEntryUpdate={this.props.onEntryUpdate} />
+                return <Item key={item.name} setGrade={this.props.setGrade} item={item} entry={entry} />
             }) : "no items"}
         </ul>)
         // todo : lazy load
     }
 }
 List.propTypes = {
-    //   entrys: PropTypes.arrayOf(PropTypes.object),
+    setGrade: PropTypes.func,
+    entrys: PropTypes.arrayOf(PropTypes.object),
+    items: PropTypes.arrayOf(PropTypes.object),
 };
 export default List;

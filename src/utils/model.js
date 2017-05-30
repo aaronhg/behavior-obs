@@ -1,4 +1,3 @@
-
 // todo : show info when save record is failed
 var url = "http://localhost:3000"
 async function getData({ start, end }) {

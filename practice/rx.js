@@ -13,9 +13,9 @@ example.subscribe({
 });
 //----------------------------------------------------------------------------------------
 
-import {Observable} from 'rxjs'
+// import {Observable} from 'rxjs'
 var app = document.createElement("div")
-app.innerHTML = "1"
+app.innerHTML = "hello"
 document.body.appendChild(app);
 var source = Observable.from("abcdefgh")//.zip(Observable.interval(1000)).scan((x)=>x[1])
 //var source = click.map(e => Rx.Observable.interval(1000).take(3));

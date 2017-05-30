@@ -1,13 +1,7 @@
 // contants
 export const ADD_ITEM = "ADD_ITEM"
-// initial state
-// const initialState = {
-//     items: [],
-//     itemDefaultValue: {},
-//     entrys: [],
-// }
 // reducer
-export default (state = initialState, action) => {
+export default (state, action) => {
     switch (action.type) {
         case ADD_ITEM:
             return {
@@ -25,8 +19,3 @@ export function addItem(item) {
         payload: item,
     }
 }
-// export var actions = () => {
-//     return {
-//         type: 1
-//     }
-// }

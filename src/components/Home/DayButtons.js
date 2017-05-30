@@ -1,4 +1,6 @@
 import React from 'react'
+import PropTypes from 'prop-types'
+
 class DayButtons extends React.Component {
     onSelectDay(day) {
         this.props.onSelectDay(day)
@@ -7,12 +9,18 @@ class DayButtons extends React.Component {
         let { date } = this.props
         let dayrange = [-4, -3, -2, -1, 0]
         return (<div>
-            {dayrange.map(day => <button key={day} value={day} onClick={() => this.onSelectDay(day)} >{day}</button>)}
+            {dayrange.map((day) => {
+                return (<button key={day} value={day} onClick={() => this.onSelectDay(day)} >{day}</button>)
+            })}
         </div>)
-        // todo : go by calendar
+        // todo : calendar
     }
 }
-DayButtons.PropTypes = {
-    // grade: PropTypes.number,
+DayButtons.propTypes = {
+    date: PropTypes.number,
+    onSelectDay: PropTypes.func,
+    // defaultValue: PropTypes.arrayOf(PropTypes.object).isRequired,
+    // defaultValue: PropTypes.object,
+    // defaultValue: PropTypes.arrayOf(PropTypes.object),
 }
 export default DayButtons;
