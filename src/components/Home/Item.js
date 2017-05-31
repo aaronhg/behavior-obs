@@ -7,12 +7,13 @@ class Item extends React.Component {
         let { setGrade, entry, item } = this.props
         let { grade } = entry
         let { name, type, bgcolor, id } = item
-        let styles = { backgroundColor: bgcolor }
-        return (<li style={styles}>
+        let rootStyles = { backgroundColor: bgcolor }
+        let gradeStyles = { float: "right" }
+        return (<div style={rootStyles}>
             {name}
-            <ItemGrade type={type} grade={grade} onGradeChange={(grade) => setGrade(item, entry, grade)
+            <ItemGrade gradeStyles={gradeStyles} type={type} grade={grade} onGradeChange={(grade) => setGrade(item, entry, grade)
             } />
-        </li>)
+        </div>)
     }
 }
 Item.propTypes = {

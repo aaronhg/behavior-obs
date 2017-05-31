@@ -6,33 +6,39 @@ var BUILD_PATH = path.resolve(ROOT_PATH, 'build');
 
 module.exports = {
     // devtool: 'cheap-module-eval-source-map',
-    entry : APP_PATH,
-    output:{
-        path : BUILD_PATH,
-        filename : 'bundle.js',
+    entry: APP_PATH,
+    output: {
+        path: BUILD_PATH,
+        filename: 'bundle.js',
     },
-    plugins:[
+    plugins: [
         new HtmlwebpackPlugin({
-        title: 'Hello World app'
-        }),
+            title: 'Hello World app',
+        })
     ],
     devServer: {
         historyApiFallback: true,
         hot: true,
         inline: true,
     },
-    module:{
-        loaders:[
+    module: {
+        loaders: [
             {
                 test: /\.jsx?$/,
                 loader: 'babel-loader',
                 include: APP_PATH,
                 exclude: /node_modules/,
                 query: {
-                    plugins: ["transform-decorators-legacy","transform-export-extensions"],
-                    presets: ['react','stage-0','es2015'],
+                    plugins: ["transform-decorators-legacy",
+                        "transform-export-extensions",
+                        ['import', {
+                            libraryName: 'antd',
+                            style: 'css'
+                        }]],
+                    presets: ['react', 'stage-0', 'es2015'],
                 }
             },
+            { test: /\.css$/, loader: "style-loader!css-loader"},
         ]
     }
 }

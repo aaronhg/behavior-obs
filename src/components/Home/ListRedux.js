@@ -8,15 +8,14 @@ export default (state, action) => {
             let { item, entry, grade } = action.payload
             let entrys = [...state.entrys]
             if (entry.id === 0 || entry.id)
-                entry.grade = grade // todo imm
+                entry.grade = grade // todo : immuteble
             else {
-                entry = {
+                entrys.push({
                     id: i++,
                     tid: item.id,
                     updateAt: new Date().getTime(),
                     grade,
-                }
-                entrys.push(entry)
+                })
             }
             return {
                 ...state,

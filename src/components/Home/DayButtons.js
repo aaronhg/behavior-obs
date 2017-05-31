@@ -8,7 +8,7 @@ class DayButtons extends React.Component {
     render() {
         let { date } = this.props
         let dayrange = [-4, -3, -2, -1, 0]
-        return (<div>
+        return (<div style={this.props.rootStyles}>
             {dayrange.map((day) => {
                 return (<button key={day} value={day} onClick={() => this.onSelectDay(day)} >{day}</button>)
             })}

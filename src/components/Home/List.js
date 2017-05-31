@@ -6,14 +6,15 @@ import Item from './Item';
 class List extends React.Component {
     render() {
         let { entrys, items } = this.props
-        return (<ul style={{}}>
+        return (<div style={{}}>
             {items ? items.map(item => {
                 let es = entrys.filter(e => item.id === e.tid)
                 let entry = (es.length) ? es[0] : {}
                 return <Item key={item.name} setGrade={this.props.setGrade} item={item} entry={entry} />
             }) : "no items"}
-        </ul>)
+        </div>)
         // todo : lazy load
+        // todo : Item's key should use id
     }
 }
 List.propTypes = {
