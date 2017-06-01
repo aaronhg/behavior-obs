@@ -22,6 +22,7 @@ class addModel extends React.Component {
         this.props.addItem({
             name: name.value,
             bgcolor: bgcolor.value,
+            id: this.props.nextid || 1,
         })
     }
     render() {

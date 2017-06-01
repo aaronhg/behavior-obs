@@ -26,7 +26,8 @@ class ItemGrade extends React.Component {
         })
       ))}
     </div>)
-    // todo delegate event
+    // todo : delegate event
+    // todo : another grade type
   }
 }
 ItemGrade.propTypes = {

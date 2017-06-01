@@ -10,4 +10,10 @@ document.body.appendChild(root);
 
 const store = configureStore()
 
-ReactDOM.render(<Provider store={store}><Home /></Provider>,root)
+ReactDOM.render(
+    <Provider store={store}>
+        <Home>
+        </Home>
+    </Provider>
+,root)
+// todo : route

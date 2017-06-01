@@ -31271,8 +31271,6 @@ Home.propTypes = {
     itemDefaultValue: _propTypes2.default.object,
     entrys: _propTypes2.default.arrayOf(_propTypes2.default.object)
 };
-// App.nextTid = 4
-// App.nextId = 13
 exports.default = (0, _reactRedux.connect)(function (state) {
     return _extends({}, state.home, {
         // entryFilter : state.home.entryFilter,

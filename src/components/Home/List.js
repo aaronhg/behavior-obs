@@ -7,10 +7,10 @@ class List extends React.Component {
     render() {
         let { entrys, items } = this.props
         return (<div style={{}}>
-            {items ? items.map(item => {
+            {items.length ? items.map(item => {
                 let es = entrys.filter(e => item.id === e.tid)
                 let entry = (es.length) ? es[0] : {}
-                return <Item key={item.name} setGrade={this.props.setGrade} item={item} entry={entry} />
+                return <Item date={this.props.date} nextid={this.props.nextid} key={item.name} setGrade={this.props.setGrade} item={item} entry={entry} />
             }) : "no items"}
         </div>)
         // todo : lazy load

@@ -3,16 +3,25 @@ import PropTypes from 'prop-types'
 import ItemGrade from './ItemGrade'
 
 class Item extends React.Component {
+    constructor() {
+        super()
+        this.setGrade = this.setGrade.bind(this)
+    }
+    setGrade(...args) {
+        let id = this.props.nextid || 1
+        let date = this.props.date
+        this.props.setGrade(...args, id,date)
+    }
     render() {
-        let { setGrade, entry, item } = this.props
+        let { entry, item } = this.props
         let { grade } = entry
         let { name, type, bgcolor, id } = item
+        let setGrade = this.setGrade
         let rootStyles = { backgroundColor: bgcolor }
         let gradeStyles = { float: "right" }
         return (<div style={rootStyles}>
             {name}
-            <ItemGrade gradeStyles={gradeStyles} type={type} grade={grade} onGradeChange={(grade) => setGrade(item, entry, grade)
-            } />
+            <ItemGrade gradeStyles={gradeStyles} type={type} grade={grade} onGradeChange={(grade) => setGrade(item, entry, grade)} />
         </div>)
     }
 }

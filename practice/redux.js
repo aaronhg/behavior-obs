@@ -13,7 +13,6 @@ var actions = [{
 }]
 var store = createStore(combineReducers({
     state1 : (state=0, action) => {
-        debugger
         console.log(action)
         return state+1
     },

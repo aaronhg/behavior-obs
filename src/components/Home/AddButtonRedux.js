@@ -4,9 +4,14 @@ export const ADD_ITEM = "ADD_ITEM"
 export default (state, action) => {
     switch (action.type) {
         case ADD_ITEM:
+            let { id } = action.payload
             return {
                 ...state,
                 items: [...state.items, action.payload],
+                nextid: {
+                    ...state.nextid,
+                    items: id + 1,
+                },
             }
         default:
             return state
