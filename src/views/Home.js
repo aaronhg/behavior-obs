@@ -36,7 +36,7 @@ class Home extends React.Component {
             <DayFilter {...this.props.dayFilterActions} />
             <List date={this.props.entryFilter.value} nextid={this.props.nextid.entrys} {...this.props.listActions} items={this.props.items} entrys={this.props.entrys} />
             <AddButton nextid={this.props.nextid.items} {...this.props.addActions} itemDefaultValue={this.props.itemDefaultValue} />
-            <Icon onClick={this.saveData} type="save" />
+            <Icon style={{fontSize:"48px"}}onClick={this.saveData} type="save" />
         </div>)
     }
 }

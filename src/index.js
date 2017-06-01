@@ -2,6 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import { Provider } from 'react-redux'
+
+import { HashRouter, Route, Link } from 'react-router-dom';
+
 import configureStore from './redux/configureStore'
 import Home from './views/Home'
 
@@ -12,8 +15,9 @@ const store = configureStore()
 
 ReactDOM.render(
     <Provider store={store}>
-        <Home>
-        </Home>
+        <HashRouter>
+            <Route path="/" component={Home} />
+        </HashRouter>
     </Provider>
-,root)
+    , root)
 // todo : route
