@@ -1,6 +1,23 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Icon } from 'antd'
+// var ItemGradeHOC = gradeType => WarpComponent => {
+// }
+var gradeTypes = {
+  "+-2": [
+    { v: -2, gen: (props) => <Icon type="minus-circle-o" {...props} ></Icon> },
+    { v: -1, gen: (props) => <Icon type="minus" {...props} /> },
+    { v: 1, gen: (props) => <Icon type="plus" {...props} /> },
+    { v: 2, gen: (props) => <Icon type="plus-circle-o" {...props} /> },
+  ],
+  "+4": [
+    { v: 1, gen: (props) => <span {...props} > {String.fromCharCode(9312)}</span> },
+    { v: 2, gen: (props) => <span {...props} > {String.fromCharCode(9313)}</span> },
+    { v: 3, gen: (props) => <span {...props} > {String.fromCharCode(9314)}</span> },
+    { v: 4, gen: (props) => <span {...props} > {String.fromCharCode(9315)}</span> },
+  ]
+}
+gradeTypes.default = gradeTypes["+-2"]
 
 class ItemGrade extends React.Component {
   toggle(grade) {
@@ -8,15 +25,15 @@ class ItemGrade extends React.Component {
       grade = 0
     this.props.onGradeChange(grade)
   }
+  shouldComponentUpdate(nextProps, nextState) {
+    let { grade, type } = this.props
+    let { ngrade, ntype } = nextProps
+    return !((grade === ngrade) || (type === ntype))
+  }
   render() {
-    let { grade } = this.props
+    let { grade, type } = this.props
     let color = { color: 'red' }
-    let grades = [
-      { v: 1, gen: (props) => <Icon type="minus-circle-o" {...props} ></Icon> },
-      { v: 2, gen: (props) => <Icon type="minus" {...props} /> },
-      { v: 3, gen: (props) => <Icon type="plus" {...props} /> },
-      { v: 4, gen: (props) => <Icon type="plus-circle-o" {...props} /> },
-    ]
+    let grades = gradeTypes[type] || gradeTypes.default
     return (<div style={this.props.gradeStyles}>
       {grades.map((g) => (
         g.gen({

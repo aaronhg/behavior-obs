@@ -5,6 +5,9 @@ import DayButtons from './DayButtons'
 import DayGoTo from './DayGoTo'
 
 class DayFilter extends React.Component {
+    shouldComponentUpdate(nextProps, nextState){
+        return true
+    }
     render() {
         let styles = {float:"left"}
         return (<div>

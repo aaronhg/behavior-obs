@@ -10,7 +10,7 @@
     "bulid": "webpack"
   },
   "pre-commit": [
-    "bulid"
+    // "bulid"
   ],
   "author": "",
   "license": "ISC",

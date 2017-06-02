@@ -13,6 +13,9 @@ class DayGoTo extends React.Component {
     onSelectDay(date,dateString) {
         this.props.onSelectDay(date.diff(moment,'days'))
     }
+    shouldComponentUpdate(nextProps, nextState){
+        return true
+    }
     render() {
         let { date } = this.props
         return (<div>

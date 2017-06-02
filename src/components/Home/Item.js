@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+
 import ItemGrade from './ItemGrade'
 
 class Item extends React.Component {
@@ -10,7 +11,11 @@ class Item extends React.Component {
     setGrade(...args) {
         let id = this.props.nextid || 1
         let date = this.props.date
-        this.props.setGrade(...args, id,date)
+        this.props.setGrade(...args, id, date)
+    }
+    shouldComponentUpdate(nextProps, nextState) {
+        //this.props = nextProps 
+        return true
     }
     render() {
         let { entry, item } = this.props
@@ -21,7 +26,7 @@ class Item extends React.Component {
         let gradeStyles = { float: "right" }
         return (<div style={rootStyles}>
             {name}
-            <ItemGrade gradeStyles={gradeStyles} type={type} grade={grade} onGradeChange={(grade) => setGrade(item, entry, grade)} />
+            <ItemGrade gradeStyles={gradeStyles} type={item.gtype} grade={grade} onGradeChange={(grade) => setGrade(item, entry, grade)} />
         </div>)
     }
 }

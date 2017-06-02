@@ -31,6 +31,9 @@ class Home extends React.Component {
             // this.props.homeActions.loadData(data)
         })
     }
+    shouldComponentUpdate(nextProps, nextState){
+        return true
+    }
     render() {
         return (<div>
             <DayFilter {...this.props.dayFilterActions} />

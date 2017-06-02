@@ -5,6 +5,9 @@ class DayButtons extends React.Component {
     onSelectDay(day) {
         this.props.onSelectDay(day)
     }
+    shouldComponentUpdate(nextProps, nextState){
+        return false
+    }
     render() {
         let { date } = this.props
         let dayrange = [-4, -3, -2, -1, 0]

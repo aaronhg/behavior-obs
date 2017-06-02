@@ -20,4 +20,3 @@ ReactDOM.render(
         </HashRouter>
     </Provider>
     , root)
-// todo : route

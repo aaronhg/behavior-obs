@@ -4,6 +4,9 @@ import PropTypes from 'prop-types'
 import Item from './Item';
 
 class List extends React.Component {
+    // shouldComponentUpdate(nextProps, nextState){
+        
+    // }
     render() {
         let { entrys, items } = this.props
         return (<div style={{}}>
