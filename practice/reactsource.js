@@ -51,10 +51,11 @@ ReactDOMComponent.prototype.mountComponent = function (id) {
 function instantiateReactComponent(el) {
     if (typeof el == "string")
         return new ReactDOMTextComponent(el)
-    if (typeof el == "object")
-        return new ReactDOMComponent(el)
     if (typeof el === 'object' && typeof el.type === 'function')
         return new ReactCompositeComponent(el);
+    if (typeof el == "object")
+        return new ReactDOMComponent(el)
+    
 }
 React = {
     nextReactId: 0,
@@ -73,27 +74,35 @@ var element = React.createElement('div', { id: 'test' }, ['click me'])
 console.log(React.render(element))
 
 //---------------------------------------------------------------------
+var ReactClass = function(){
+}
+ReactClass.prototype.render = function(){}
 
 React.createClass = function(obj){
-    return function(){
-        this.getInitialState = obj.getInitialState
-        this.componentWillMount = obj.componentWillMount
-        this.getInitialState = obj.getInitialState
-        this.render = obj.render
+    var Constructor = function (props) {
+        this.props = props;
+        this.state = this.getInitialState ? this.getInitialState() : null;
     }
+    Constructor.prototype = new ReactClass()
+    Constructor.prototype.componentWillMount = obj.componentWillMount
+    Constructor.prototype.getInitialState = obj.getInitialState
+    Constructor.prototype.render = obj.render
+    return Constructor
 }
 function ReactCompositeComponent(el) {
     this.el = el
-    el.type.call(this)
-    this.state = this.getInitialState()
     this.id = null
+    this.ins = null
 }
 ReactCompositeComponent.prototype.mountComponent = function(id){
-    if (this.mountComponent)
-        this.mountComponent()
-    let markup = this.render()
-    if (this.componentDidMount)
-        this.componentDidMount()
+    this.id = id
+    let ins = new this.el.type(this.el.props)
+    this.ins = ins
+    if (this.componentWillMount)
+        this.componentWillMount()
+    this.childrenInstance = instantiateReactComponent(ins.render())
+    let markup = this.childrenInstance.mountComponent(id)
+    
     return markup
 }
 
@@ -103,9 +112,6 @@ var HelloMessage = React.createClass({
   },
   componentWillMount: function() {
     console.log('我就要开始渲染了。。。')
-  },
-  componentDidMount: function() {
-    console.log('我已经渲染好了。。。')
   },
   render: function() {
     return React.createElement("div", null,[this.state.type, "Hello ", this.props.name]);
