@@ -14,20 +14,6 @@ import storge from '../utils/storge'
 import { withRouter } from 'react-router-dom'
 
 class Home extends React.Component {
-    constructor(){
-        super()
-        this.saveData = this.saveData.bind(this)
-    }
-    saveData(){
-        let data = {
-            items : this.props.items,
-            entrys: this.props.entrys,
-            nextid: this.props.nextid,
-        }
-        storge.saveAll(data).then(()=>{
-            // this.props.homeActions.loadData(data)
-        })
-    }
     shouldComponentUpdate(nextProps, nextState){
         return true
     }
@@ -50,8 +36,8 @@ Home.propTypes = {
 }
 export default withRouter(connect((state) => {
     return {
-        ...state,
-        entrys: state.entrys.filter(state.entryFilter.fn),
+        ...state.app,
+        entrys: state.app.entrys.filter(state.app.entryFilter.fn),
     };
 }, (dispatch) => {
     return {

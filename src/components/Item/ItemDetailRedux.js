@@ -1,13 +1,23 @@
 // contants
-export const ADD_ITEM = "ADD_ITEM"
+export const SAVE_ITEM = "SAVE_ITEM"
 // reducer
 export default (state, action) => {
     switch (action.type) {
-        case ADD_ITEM:
+        case SAVE_ITEM:
             let { id } = action.payload
+            let items = state.items
+            if (id < state.nextid.items) { // exist
+                let i = state.items.filter(i => i.id === id)[0]
+                i.name = action.payload.name
+                i.bgcolor = action.payload.bgcolor
+                i.type = action.payload.type
+            } else {
+                items = [...state.items, action.payload]
+            }
+            // todo immutable
             return {
                 ...state,
-                items: [...state.items, action.payload],
+                items: items,
                 nextid: {
                     ...state.nextid,
                     items: id + 1,
@@ -18,9 +28,9 @@ export default (state, action) => {
     }
 }
 // action creators
-export function addItem(item) {
+export function saveItem(item) {
     return {
-        type: ADD_ITEM,
+        type: SAVE_ITEM,
         payload: item,
     }
 }

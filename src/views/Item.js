@@ -10,24 +10,25 @@ import ItemDetail from '../components/Item/ItemDetail'
 import * as itemActions from './ItemRedux'
 
 class Item extends React.Component {
-    render(){
-        let id = this.props.match.params.id
-        return (<ItemDetail id={id} {...this.props.itemDetailActions}>    
-
-                </ItemDetail>
-            )
+    render() {
+        return (<ItemDetail nextid={this.props.nextid} item={this.props.item} existNames={this.props.existNames} itemDefaultValue={this.props.itemDefaultValue} {...this.props.itemDetailActions} />)
     }
 }
 Item.propTypes = {
-    // addItem: PropTypes.func.isRequired,
-    // defaultValue: PropTypes.arrayOf(PropTypes.object).isRequired,
-    // defaultValue: PropTypes.object,
-    // defaultValue: PropTypes.arrayOf(PropTypes.object),
+    // itemDefaultValue: PropTypes.arrayOf(PropTypes.object).isRequired,
+    // item: PropTypes.object,
+    // existNames: PropTypes.arrayOf(PropTypes.object),
 }
 export default withRouter(connect((state) => {
+    // state.router.location.pathname = "/items/1"
+    let pathname = state.router.location.pathname
+    let id = pathname.split("/")[2]
+    let app = state.app
     return {
-        itemDefaultValue: state.itemDefaultValue,
-        // existItemNames: state.entrys.filter(state.entryFilter.fn), // todo :
+        itemDefaultValue: app.itemDefaultValue,
+        item: app.items.filter(i => i.id == id)[0] || {},
+        existNames: app.items.map(i => i.name),
+        nextid: app.nextid.items,
     };
 }, (dispatch) => {
     return {

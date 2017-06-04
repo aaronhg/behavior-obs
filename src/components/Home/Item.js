@@ -22,11 +22,11 @@ class Item extends React.Component {
         let { grade } = entry
         let { name, type, bgcolor, id } = item
         let setGrade = this.setGrade
-        let rootStyles = { backgroundColor: bgcolor }
+        let rootStyles = { backgroundColor: bgcolor,height: "40px" }
         let gradeStyles = { float: "right" }
-        return (<div className="card" style={{height: "40px"}}>
+        return (<div className="card" style={rootStyles}>
             <Link to={`/items/${id}`} > {name}</Link>
-            <ItemGrade gradeStyles={gradeStyles} type={item.gtype} grade={grade} onGradeChange={(grade) => setGrade(item, entry, grade)} />
+            <ItemGrade gradeStyles={gradeStyles}  type={item.gtype} grade={grade} onGradeChange={(grade) => setGrade(item, entry, grade)} />
         </div>)
     }
 }

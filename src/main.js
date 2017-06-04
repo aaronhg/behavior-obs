@@ -3,30 +3,41 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux'
 import { HashRouter, Route, Link, IndexRoute, HashHistory } from 'react-router-dom';
 
-import configureStore from './redux/configureStore'
+import configureStore, { history } from './redux/configureStore'
 import Home from './views/Home'
 // import Root from './views/Root'
 import Item from './views/Item'
 import Summary from './views/Summary'
 
 import './main.scss';
-
+import { loadData } from './mainRedux'
 import storge from './utils/storge'
+import { Icon } from 'antd'
+import { ConnectedRouter } from 'react-router-redux'
 
-const root = document.createElement("div");
-document.body.appendChild(root);
+const root = document.createElement("div")
+document.body.appendChild(root)
 
 const store = configureStore()
 
 class Main extends React.Component {
+    constructor() {
+        super()
+        this.saveData = this.saveData.bind(this)
+    }
+    saveData() {
+        let data = store.getState().app
+        storge.saveAll(data).then(() => {
+        })
+    }
     componentDidMount() {
         storge.getAll().then((data) => {
-            this.props.rootActions.loadData(data)
+            store.dispatch(loadData(data))
         })
     }
     render() {
         return (<Provider store={store}>
-            <HashRouter>
+            <ConnectedRouter history={history}>
                 <div>
                     <div className="top-bar">
                         <div className="top-bar-left">
@@ -36,7 +47,7 @@ class Main extends React.Component {
                                 <li><Link to="/summary">Summary</Link></li>
                             </ul>
                         </div>
-                        <Icon style={{fontSize:"48px"}} onClick={this.saveData} type="save" />
+                        <Icon style={{ fontSize: "48px" }} onClick={this.saveData} type="save" />
                     </div>
                     <div>
                         <Route exact path="/" component={Home} />
@@ -44,7 +55,7 @@ class Main extends React.Component {
                         <Route path="/summary" component={Summary} />
                     </div>
                 </div>
-            </HashRouter>
+            </ConnectedRouter>
         </Provider>)
     }
 }

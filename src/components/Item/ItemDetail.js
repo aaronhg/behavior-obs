@@ -7,21 +7,20 @@ import { CirclePicker } from 'react-color'
 class ItemDetail extends React.Component {
     constructor() {
         super()
-        this.handleAdd = this.handleAdd.bind(this)
+        this.handleSave = this.handleSave.bind(this)
         this.setColor = this.setColor.bind(this)
         this.inputRefs = {}
     }
-    handleAdd() {
-        let { id } = this.props
+    handleSave() {
+        let { item, existNames } = this.props
         const { name, bgcolor, gtype } = this.inputRefs
-        this.props.addItem({
+        this.props.saveItem({
             name: name.value,
             bgcolor: bgcolor.hex,
             gtype: gtype.value,
-            id: this.props.nextid || 1,
+            id: item.id || this.props.nextid || 1,
         })
-        // todo : then redriect to /home
-        // todo : thunk ?
+        // todo : then redriect to /home , thunk ?
     }
     setColor(color) {
         this.inputRefs.bgcolor = color
@@ -30,14 +29,15 @@ class ItemDetail extends React.Component {
         return true
     }
     render() {
-        let { setColor } = this
+        let { item, itemDefaultValue } = this.props
+        let values = item || itemDefaultValue
         return (<form>
             <div className="row">
                 <div className="small-3 columns">
                     <label className="text-right middle">Name:</label>
                 </div>
                 <div className="small-3 columns">
-                     <input ref={(ref) => this.inputRefs.name = ref} placeholder=".medium-6.columns" />
+                    <input ref={(ref) => this.inputRefs.name = ref} placeholder="item name" defaultValue={values.name}/>
                 </div>
             </div>
             <div className="row">
@@ -45,7 +45,7 @@ class ItemDetail extends React.Component {
                     <label className="text-right middle">Background Color:</label>
                 </div>
                 <div className="small-3 columns">
-                     <CirclePicker onChangeComplete={setColor} ></CirclePicker>
+                    <CirclePicker onChangeComplete={this.setColor} color={values.bgcolor}></CirclePicker>
                 </div>
             </div>
             <div className="row">
@@ -53,7 +53,7 @@ class ItemDetail extends React.Component {
                     <label className="text-right middle">Type:</label>
                 </div>
                 <div className="small-3 columns">
-                     <select ref={(ref) => this.inputRefs.gtype = ref} defaultValue="+-2" >
+                    <select ref={(ref) => this.inputRefs.gtype = ref} defaultValue={values.gtype} >
                         <option value="+-2">
                             +-2
                                     </option>
@@ -66,7 +66,8 @@ class ItemDetail extends React.Component {
             <a className="button tiny" style={{
                 position: "absolute",
                 bottom: 0,
-                right: "20px",}} onClick={this.handleAdd}> Save </a>
+                right: "20px",
+            }} onClick={this.handleSave}> Save </a>
         </form>
         )
         // todo : 
