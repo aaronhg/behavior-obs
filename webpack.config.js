@@ -6,14 +6,17 @@ var BUILD_PATH = path.resolve(ROOT_PATH, 'build');
 
 module.exports = {
     // devtool: 'cheap-module-eval-source-map',
-    entry: APP_PATH,
+    entry: {
+        app: [path.resolve(__dirname, './src/main.js')],
+    },
     output: {
         path: BUILD_PATH,
         filename: 'bundle.js',
     },
     plugins: [
         new HtmlwebpackPlugin({
-            title: 'Hello World app',
+            inject: 'body',
+            template: 'src/main.html',
         })
     ],
     devServer: {
@@ -38,7 +41,7 @@ module.exports = {
                     presets: ['react', 'stage-0', 'es2015'],
                 }
             },
-            { test: /\.css$/, loader: "style-loader!css-loader"},
+            { test: /\.s?css$/, loader: "style-loader!css-loader!sass-loader"},
         ]
     }
 }

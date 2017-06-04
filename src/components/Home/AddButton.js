@@ -1,17 +1,20 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import AddModel from './AddModel'
+import { Link } from 'react-router-dom';
 
 class AddButton extends React.Component {
-    shouldComponentUpdate(nextProps, nextState){
-        return true
-    }
     render() {
-        return (<AddModel nextid={this.props.nextid} addItem={this.props.addItem} {...this.props.defaultValue} />)
+        return (<div>
+            <Link className="button tiny" style={{
+                position: "absolute",
+                bottom: 0,
+                right: "20px",
+            }} to="/items/new">Add</Link>
+        </div>)
     }
 }
 AddButton.propTypes = {
-    addItem: PropTypes.func.isRequired,
+    // addItem: PropTypes.func.isRequired,
     // defaultValue: PropTypes.arrayOf(PropTypes.object).isRequired,
     // defaultValue: PropTypes.object,
     // defaultValue: PropTypes.arrayOf(PropTypes.object),

@@ -11,15 +11,12 @@ import * as homeActions from './HomeRedux'
 // import model from './utils/model'
 import storge from '../utils/storge'
 
+import { withRouter } from 'react-router-dom'
+
 class Home extends React.Component {
     constructor(){
         super()
         this.saveData = this.saveData.bind(this)
-    }
-    componentDidMount(){
-        storge.getAll().then((data)=>{
-            this.props.homeActions.loadData(data)
-        })
     }
     saveData(){
         let data = {
@@ -37,9 +34,10 @@ class Home extends React.Component {
     render() {
         return (<div>
             <DayFilter {...this.props.dayFilterActions} />
+            
+            <hr />
             <List date={this.props.entryFilter.value} nextid={this.props.nextid.entrys} {...this.props.listActions} items={this.props.items} entrys={this.props.entrys} />
-            <AddButton nextid={this.props.nextid.items} {...this.props.addActions} itemDefaultValue={this.props.itemDefaultValue} />
-            <Icon style={{fontSize:"48px"}}onClick={this.saveData} type="save" />
+            <AddButton />
         </div>)
     }
 }
@@ -50,19 +48,15 @@ Home.propTypes = {
     entrys: PropTypes.arrayOf(PropTypes.object),
     // nextid: 
 }
-export default connect((state) => {
+export default withRouter(connect((state) => {
     return {
-        ...state.home,
-        // entryFilter : state.home.entryFilter,
-        // items: state.home.items,
-        // itemDefaultValue: state.home.itemDefaultValue,
-        entrys: state.home.entrys.filter(state.home.entryFilter.fn),
+        ...state,
+        entrys: state.entrys.filter(state.entryFilter.fn),
     };
 }, (dispatch) => {
     return {
         homeActions : bindActionCreators(homeActions.homeActions, dispatch),
-        addActions: bindActionCreators(homeActions.addActions, dispatch),
         listActions: bindActionCreators(homeActions.listActions, dispatch),
         dayFilterActions:bindActionCreators(homeActions.dayFilterActions, dispatch),
     };
-})(Home)
+})(Home))

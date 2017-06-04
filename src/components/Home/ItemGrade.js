@@ -26,9 +26,10 @@ class ItemGrade extends React.Component {
     this.props.onGradeChange(grade)
   }
   shouldComponentUpdate(nextProps, nextState) {
-    let { grade, type } = this.props
-    let { ngrade, ntype } = nextProps
-    return !((grade === ngrade) || (type === ntype))
+    return true
+    // let { grade, type } = this.props
+    // let { ngrade, ntype } = nextProps
+    // return !((grade === ngrade) || (type === ntype))
   }
   render() {
     let { grade, type } = this.props

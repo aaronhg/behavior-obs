@@ -18,13 +18,12 @@ class DayGoTo extends React.Component {
     }
     render() {
         let { date } = this.props
-        return (<div>
+        return (<div style={this.props.rootStyles}>
             <DatePicker defaultValue={moment()} onChange={this.onSelectDay}/>
-            
         </div>)
         // todo : go by calendar
-        //<input ref={input => this.gotoDOM = input} value={date} />
-            // <button onClick={this.onSelectDay} >go</button>
+        // <input ref={input => this.gotoDOM = input} value={date} />
+        // <button onClick={this.onSelectDay} >go</button>
     }
 }
 DayGoTo.propTypes = {
