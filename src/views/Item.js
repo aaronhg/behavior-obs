@@ -11,11 +11,10 @@ import * as itemActions from './ItemRedux'
 
 class Item extends React.Component {
     render() {
-        return (<ItemDetail nextid={this.props.nextid} item={this.props.item} existNames={this.props.existNames} itemDefaultValue={this.props.itemDefaultValue} {...this.props.itemDetailActions} />)
+        return (<ItemDetail nextid={this.props.nextid} item={this.props.item} existNames={this.props.existNames} {...this.props.itemDetailActions} />)
     }
 }
 Item.propTypes = {
-    // itemDefaultValue: PropTypes.arrayOf(PropTypes.object).isRequired,
     // item: PropTypes.object,
     // existNames: PropTypes.arrayOf(PropTypes.object),
 }
@@ -25,7 +24,6 @@ export default withRouter(connect((state) => {
     let id = pathname.split("/")[2]
     let app = state.app
     return {
-        itemDefaultValue: app.itemDefaultValue,
         item: app.items.filter(i => i.id == id)[0] || {},
         existNames: app.items.map(i => i.name),
         nextid: app.nextid.items,

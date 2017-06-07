@@ -4,7 +4,7 @@ import homeReducerObj from '../views/HomeRedux'
 import itemReducerObj from '../views/ItemRedux'
 import mainReducerObj from '../mainRedux'
 
-export default createReducer(initialState,{
+export default createReducer(initialState, {
     ...homeReducerObj,
     ...itemReducerObj,
     ...mainReducerObj,

@@ -10,12 +10,16 @@ var gradeTypes = {
     { v: 1, gen: (props) => <Icon type="plus" {...props} /> },
     { v: 2, gen: (props) => <Icon type="plus-circle-o" {...props} /> },
   ],
-  "+4": [
+  "+5": [
     { v: 1, gen: (props) => <span {...props} > {String.fromCharCode(9312)}</span> },
     { v: 2, gen: (props) => <span {...props} > {String.fromCharCode(9313)}</span> },
     { v: 3, gen: (props) => <span {...props} > {String.fromCharCode(9314)}</span> },
-    { v: 4, gen: (props) => <span {...props} > {String.fromCharCode(9315)}</span> },
-  ]
+  { v: 4, gen: (props) => <span {...props} > {String.fromCharCode(9315)}</span> },
+  { v: 5, gen: (props) => <span {...props} > {String.fromCharCode(9316)}</span> },
+  ],
+  "keyin": [
+    { v: 1, gen: (props) => <input {...props} > </input> },
+  ],
 }
 gradeTypes.default = gradeTypes["+-2"]
 

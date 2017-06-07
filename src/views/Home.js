@@ -30,7 +30,6 @@ class Home extends React.Component {
 Home.propTypes = {
     // entryFilter: PropTypes.func.isRequired, // todo
     items: PropTypes.arrayOf(PropTypes.object).isRequired,
-    itemDefaultValue: PropTypes.object,
     entrys: PropTypes.arrayOf(PropTypes.object),
     // nextid: 
 }

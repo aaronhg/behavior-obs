@@ -3,7 +3,9 @@ import PropTypes from 'prop-types'
 
 import { Icon } from 'antd'
 import { CirclePicker } from 'react-color'
+let itemDefaultValue = {
 
+}
 class ItemDetail extends React.Component {
     constructor() {
         super()
@@ -29,7 +31,6 @@ class ItemDetail extends React.Component {
         return true
     }
     render() {
-        let { item, itemDefaultValue } = this.props
         let values = item || itemDefaultValue
         return (<form>
             <div className="row">
@@ -57,8 +58,11 @@ class ItemDetail extends React.Component {
                         <option value="+-2">
                             +-2
                                     </option>
-                        <option value="+4">
-                            +4
+                        <option value="+5">
+                            +5
+                                    </option>
+                        <option value="keyin">
+                            keyin
                                     </option>
                     </select>
                 </div>

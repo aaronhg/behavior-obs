@@ -3,6 +3,9 @@ import PropTypes from 'prop-types'
 
 import { Link } from 'react-router-dom'
 import ItemGrade from './ItemGrade'
+import { Badge,Icon } from 'antd'
+
+// <Badge count="tag1" /><Badge count="tag2" />
 
 class Item extends React.Component {
     constructor() {
@@ -25,7 +28,8 @@ class Item extends React.Component {
         let rootStyles = { backgroundColor: bgcolor,height: "40px" }
         let gradeStyles = { float: "right" }
         return (<div className="card" style={rootStyles}>
-            <Link to={`/items/${id}`} > {name}</Link>
+            <Icon type="star-o" /><Link to={`/items/${id}`} > {name}</Link>
+            
             <ItemGrade gradeStyles={gradeStyles}  type={item.gtype} grade={grade} onGradeChange={(grade) => setGrade(item, entry, grade)} />
         </div>)
     }
