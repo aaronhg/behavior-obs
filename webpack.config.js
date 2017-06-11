@@ -7,7 +7,7 @@ var BUILD_PATH = path.resolve(ROOT_PATH, 'build');
 module.exports = {
     // devtool: 'cheap-module-eval-source-map',
     entry: {
-        app: [path.resolve(__dirname, './src/main.js')],
+        app: [path.resolve(__dirname, './src/app/app.js')],
     },
     output: {
         path: BUILD_PATH,
@@ -17,7 +17,7 @@ module.exports = {
     plugins: [
         new HtmlwebpackPlugin({
             inject: 'body',
-            template: 'src/main.html',
+            template: 'src/app/app.html',
         })
     ],
     devServer: {

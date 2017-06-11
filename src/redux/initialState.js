@@ -1,39 +1,42 @@
-import { dayFilterCreator } from '../components/Home/DayFilterRedux'
+import { dayFilterCreator } from '../home/DayFilterRedux'
 import moment from 'moment'
 
 // initial state
 export default {
-    entryFilter: {
+    recordFilter: {
         fn: dayFilterCreator(0),
         value: moment().format('YYYY/MM/DD'),
     },
-    items: [{
-        id: uuid,
-        name,
-        bgcolor,
-        gtype,
-        ref_tags: [{
-            id,
-            name,
-        }],
-        weight,
-        order,
-        update_at,
-    }],
-    records: [{
-        id: uuid,
-        ref_item_id,
-        date,
-        stared,
-        grade,
-        memo,
-        ref_ttags: [{
-            id,
-            name,
-        }],
-        update_at,
-    }],
-    // tags: [{
+    items: [],
+    // {
+    //     id: uuid,
+    //     name,
+    //     bgcolor,
+    //     gtype,
+    //     ref_tags: [{
+    //         id,
+    //         name,
+    //     }],
+    //     weight,
+    //     order,
+    //     update_at,
+    // }
+    records: [],
+    // {
+    //     id: uuid,
+    //     ref_item_id,
+    //     date,
+    //     stared,
+    //     grade,
+    //     memo,
+    //     ref_ttags: [{
+    //         id,
+    //         name,
+    //     }],
+    //     update_at,
+    // },
+    tags: [],
+    // {
     //     id: uuid,
     //     name,
     //     ref_items: [{
@@ -41,7 +44,8 @@ export default {
     //     }],
     //     update_at,
     // }],
-    // ttags: [{
+    ttags: [],
+    // {
     //     id: uuid,
     //     name,
     //     ref_records: [{

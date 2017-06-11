@@ -1,11 +1,11 @@
 import { createReducer } from '../redux/utils'
 import initialState from '../redux/initialState'
-import homeReducerObj from '../views/HomeRedux'
-import itemReducerObj from '../views/ItemRedux'
-import mainReducerObj from '../mainRedux'
+import mainReducerObj from '../app/MainRedux'
+import itemsReducerObj from '../items/ItemsRedux'
+import homeReducerObj from '../home/HomeRedux'
 
 export default createReducer(initialState, {
     ...homeReducerObj,
-    ...itemReducerObj,
+    ...itemsReducerObj,
     ...mainReducerObj,
 })
