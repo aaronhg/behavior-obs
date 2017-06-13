@@ -2,6 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom';
 
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import ContentAdd from 'material-ui/svg-icons/content/add';
+
 class AddButton extends React.Component {
     render() {
         return (<div>
@@ -9,7 +12,9 @@ class AddButton extends React.Component {
                 position: "absolute",
                 bottom: 0,
                 right: "20px",
-            }} to="/items/new">Add</Link>
+            }} to="/items/new"><FloatingActionButton>
+      <ContentAdd />
+    </FloatingActionButton></Link>
         </div>)
     }
 }

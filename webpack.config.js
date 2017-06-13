@@ -35,10 +35,11 @@ module.exports = {
                 query: {
                     plugins: ["transform-decorators-legacy",
                         "transform-export-extensions",
-                        ['import', {
-                            libraryName: 'antd',
-                            style: 'css'
-                        }]],
+                        // ['import', {
+                        //     libraryName: 'antd',
+                        //     style: 'css'
+                        // }]
+                        ],
                     presets: ['react', 'stage-0', 'es2015'],
                 }
             },

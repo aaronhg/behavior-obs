@@ -1,39 +1,52 @@
 // contants
-export const SET_GRADE = "SET_GRADE"
+export const SAVE_RECORD = "SAVE_RECORD"
 // reducer
 export default (state, action) => {
     switch (action.type) {
-        case SET_GRADE:
-            let { item, record, grade, id, date } = action.payload
+        case SAVE_RECORD:
+            let { record } = action.payload
             let records = [...state.records]
-            if (record.id) {
-                record.grade = grade // todo : immuteble
-                return {
-                    ...state,
-                    records,
+            var r = records.filter((r) => r.id == record.id)[0]
+            if (r) {
+                records.splice(records.indexOf(r), 1);
+                record = {
+                    ...r,
+                    ...record,
                 }
             }
-            else {
-                records.push({
-                    id: id,
-                    tid: item.id,
-                    updateAt: new Date().getTime(), // todo : pure function
-                    grade,
-                    date,
-                })
-                return {
-                    ...state,
-                    records,
+            let etags = [...state.etags]
+            if (record.ref_etags && record.ref_etags.length) {
+                let max = record.ref_etags.length
+                for (let j=0; j < max; j++) {
+                    let id = record.ref_etags[j].id
+                    let e = etags.find((e) => e.id == id)
+                    if (!e) {
+                        e = record.ref_etags[j]
+                        etags.push(e)
+                    }
+                    if (!e.ref_records)
+                        e.ref_records = []
+                    if (!e.ref_records.find(r => r.id == record.id))
+                        e.ref_records.push({
+                            id: record.id,
+                        })
                 }
+            }
+            // FP
+            records.push(record)
+            return {
+                ...state,
+                etags,
+                records,
             }
         default:
             return state
     }
 }
 // action creators
-export function setGrade(item, record, grade, id, date) {
+export function saveRecord(record) {
     return {
-        type: SET_GRADE,
-        payload: { item, record, grade, id, date },
+        type: SAVE_RECORD,
+        payload: { record },
     }
 }

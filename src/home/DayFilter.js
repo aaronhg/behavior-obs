@@ -12,8 +12,10 @@ class DayFilter extends React.Component {
         let styles = {float:"left"}
         return (<div>
             <DayButtons rootStyles={styles} onSelectDay={this.props.setRecordFilterByDay} />
-            <DayGoTo rootStyles={styles} onSelectDay={this.props.setRecordFilterByDay} />
+            
         </div>)
+        // <DayGoTo rootStyles={styles} onSelectDay={this.props.setRecordFilterByDay} />
+        
     }
 }
 DayFilter.propTypes = {

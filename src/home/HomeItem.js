@@ -4,39 +4,84 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
 import HomeItemGrade from './HomeItemGrade'
-import { Badge, Icon } from 'antd'
-import gen from '../utils/id'
+import FontIcon from 'material-ui/FontIcon';
+import { getShortID, getTimestamp } from '../utils/id'
+import { Card } from 'material-ui/Card'
 
-// <Badge count="tag1" /><Badge count="tag2" />
-
+class Star extends React.Component {
+    render() {
+        let { star } = this.props
+        let style = star ? { color: "red" } : null
+        return (<FontIcon className="material-icons" style={style} onClick={this.props.onStarChange} >star_outline</FontIcon>)
+    }
+}
 class HomeItem extends React.Component {
     constructor() {
         super()
         this.setGrade = this.setGrade.bind(this)
+        this.setStar = this.setStar.bind(this)
     }
-    setGrade(...args) {
+    setGrade(grade) {
+        let { record, item } = this.props
         let { date } = this.props
-        this.props.setGrade(...args, gen(), date)
+        if (!record.id) {
+            record = {
+                id: getShortID(),
+                ref_item_id: item.id,
+                date,
+                star: false,
+                grade,
+                memo: "",
+                update_at: getTimestamp(),
+            }
+        } else {
+            record.grade = grade
+        }
+        this.props.saveRecord(record)
+    }
+    setStar() {
+        let { record, item } = this.props
+        let { date } = this.props
+        if (!record.id) {
+            record = {
+                id: getShortID(),
+                ref_item_id: item.id,
+                date,
+                star: true,
+                grade: 0,
+                memo: "",
+                update_at: getTimestamp(),
+            }
+        } else {
+            record.star = !record.star
+        }
+        this.props.saveRecord(record)
     }
     shouldComponentUpdate(nextProps, nextState) {
         return true
     }
     render() {
-        let { record, item } = this.props
-        let { grade } = record
+        let { record, item, saveRecord } = this.props
+        let { grade, star, memo, ref_etags } = record
         let { name, type, bgcolor, id } = item
-        let setGrade = this.setGrade
-        let rootStyles = { backgroundColor: bgcolor, height: "40px" }
+        let rootStyles = { backgroundColor: bgcolor, height: "60px", paddingTop: "4px", paddingBottom: "4px" }
         let gradeStyles = { float: "right" }
-        return (<div className="card" style={rootStyles} >
-            <Icon type="star-o" /><Link to={`/items/${id}`} > {name}</Link>
-
-            <HomeItemGrade gradeStyles={gradeStyles} type={item.gtype} grade={grade} onGradeChange={(grade) => setGrade(item, record, grade)} />
-        </div>)
+        let memoStyles = {
+            color: (ref_etags && ref_etags.length) || memo ? "red" : null,
+        }
+        return (<Card style={rootStyles} >
+            <Link to={`/tags/i/${id}`}>{name}</Link>
+            <HomeItemGrade gradeStyles={gradeStyles} type={item.gtype} grade={grade} onGradeChange={(grade) => this.setGrade(grade)} />
+            <Star star={star} onStarChange={() => this.setStar()} />
+            <FontIcon className="material-icons" style={memoStyles} onClick={() => {
+                this.props.openMemoDialog(record)
+            }
+            }>insert_comment</FontIcon>
+        </Card>)
     }
 }
 HomeItem.propTypes = {
-    setGrade: PropTypes.func,
+    saveRecord: PropTypes.func,
     record: PropTypes.shape({
         grade: PropTypes.number,
     }),

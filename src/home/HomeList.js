@@ -13,9 +13,9 @@ class List extends React.Component {
             <div>
                 {items.length ? 
                     items.map(item => {
-                        let es = records.filter(e => item.id === e.tid)
+                        let es = records.filter(e => item.id === e.ref_item_id)
                         let record = (es.length) ? es[0] : {}
-                        return (<HomeItem date={this.props.date} key={item.name} setGrade={this.props.setGrade} item={item} record={record} />)
+                        return (<HomeItem date={this.props.date} key={item.id} openMemoDialog={this.props.openMemoDialog} saveRecord={this.props.saveRecord} item={item} record={record} />)
                     }) 
                     : "no items"
                 }
@@ -26,7 +26,7 @@ class List extends React.Component {
     }
 }
 List.propTypes = {
-    setGrade: PropTypes.func,
+    saveRecord: PropTypes.func,
     records: PropTypes.arrayOf(PropTypes.object),
     items: PropTypes.arrayOf(PropTypes.object),
 };

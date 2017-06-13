@@ -1,26 +1,26 @@
 import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
-import {Icon} from 'antd'
 import List from './HomeList'
 import DayFilter from './DayFilter'
 import * as homeActions from './HomeRedux'
+import * as dialogActions from '../dialog/MemoDialogRedux'
 
-import { withRouter } from 'react-router-dom'
 
 class Home extends React.Component {
-    shouldComponentUpdate(nextProps, nextState){
+    shouldComponentUpdate(nextProps, nextState) {
         return true
     }
     render() {
         return (<div>
+            {this.props.recordFilter.value}
             <DayFilter {...this.props.dayFilterActions} />
-            
             <hr />
-            <List date={this.props.recordFilter.value} {...this.props.listActions} items={this.props.items} records={this.props.records} />
-            
+            <List date={this.props.recordFilter.value} {...this.props.listActions} {...this.props.dialogActions} items={this.props.items} records={this.props.records} />
+
         </div>)
     }
 }
@@ -37,6 +37,7 @@ export default withRouter(connect((state) => {
 }, (dispatch) => {
     return {
         listActions: bindActionCreators(homeActions.listActions, dispatch),
-        dayFilterActions:bindActionCreators(homeActions.dayFilterActions, dispatch),
+        dayFilterActions: bindActionCreators(homeActions.dayFilterActions, dispatch),
+        dialogActions: bindActionCreators(dialogActions, dispatch),
     };
 })(Home))

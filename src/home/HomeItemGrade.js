@@ -1,14 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Icon } from 'antd'
+import FontIcon from 'material-ui/FontIcon';
 // var ItemGradeHOC = gradeType => WarpComponent => {
 // }
 var gradeTypes = {
   "+-2": [
-    { v: -2, gen: (props) => <Icon type="minus-circle-o" {...props} ></Icon> },
-    { v: -1, gen: (props) => <Icon type="minus" {...props} /> },
-    { v: 1, gen: (props) => <Icon type="plus" {...props} /> },
-    { v: 2, gen: (props) => <Icon type="plus-circle-o" {...props} /> },
+    { v: -2, gen: (props) => <FontIcon className="material-icons" {...props} >sentiment_very_dissatisfied</FontIcon> },
+    { v: -1, gen: (props) => <FontIcon className="material-icons" {...props} >sentiment_dissatisfied</FontIcon> },
+    { v: 1, gen: (props) => <FontIcon className="material-icons" {...props} >sentiment_satisfied</FontIcon> },
+    { v: 2, gen: (props) => <FontIcon className="material-icons" {...props} >sentiment_very_satisfied</FontIcon> },
   ],
   "+5": [
     { v: 1, gen: (props) => <span {...props} > {String.fromCharCode(9312)}</span> },

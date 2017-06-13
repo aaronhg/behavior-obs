@@ -1,15 +1,15 @@
 import moment from 'moment'
-export function filterCreator({ startAt, endAt }) {
-    return (record) => startAt <= record.updateAt && record.updateAt <= endAt
+export function filterCreator(date) {
+    return (record) => record.date == date
 }
-export function dayFilterCreator(day){
-    let d = /\d{4}\/\d{2}\/\d{2}/.test(day) ? new Date(day) : new Date() // pure function ?
-    return filterCreator({
-        startAt: d.setHours(day * 24 + 0, 0, 0, 0),
-        endAt: d.setHours(23, 59, 59, 999),
-    })
-}
-var day2date = function day2date(day){
+// export function dateFilterCreator(day){
+//     let d = /\d{4}\/\d{2}\/\d{2}/.test(day) ? new Date(day) : new Date()
+//     return filterCreator({
+//         startAt: d.setHours(day * 24 + 0, 0, 0, 0),
+//         endAt: d.setHours(23, 59, 59, 999),
+//     })
+// }
+export function day2date(day){
     let d = new Date()
     d.setHours(day * 24 + 0, 0, 0, 0)
     return moment(d).format("YYYY/MM/DD")
@@ -24,7 +24,7 @@ export default (state, action) => {
             return {
                 ...state,
                 recordFilter: { 
-                    fn : dayFilterCreator(day),
+                    fn : filterCreator(day2date(day)),
                     value : day2date(day),
                 },
             }

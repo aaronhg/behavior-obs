@@ -1,23 +1,24 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import moment from 'moment'
-import { DatePicker } from 'antd'
+// import moment from 'moment'
+import DatePicker from 'material-ui/DatePicker';
 
 class DayGoTo extends React.Component {
     constructor() {
         super()
         this.onSelectDay = this.onSelectDay.bind(this)
     }
-    onSelectDay(date, dateString) {
-        this.props.onSelectDay(date.diff(moment(), 'days'))
+    onSelectDay(n,date) {
+        console.log(date)
+        // this.props.onSelectDay(date.diff(moment(), 'days'))
     }
     shouldComponentUpdate(nextProps, nextState) {
         return true
     }
     render() {
         return (<div style={this.props.rootStyles}>
-            <DatePicker defaultValue={moment()} onChange={this.onSelectDay} />
+            <DatePicker autoOk={true} onChange={this.onSelectDay} />
         </div>)
     }
 }

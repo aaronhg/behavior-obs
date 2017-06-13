@@ -1,5 +1,4 @@
 import indexdb from './storages/indexdbSimple'
-// import id,{setup} from './storges/id'
 // import other from './storges/other'
 
 // version

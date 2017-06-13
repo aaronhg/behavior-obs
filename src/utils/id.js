@@ -1,5 +1,8 @@
 import shortid from 'shortid'
 
-export default function () {
+export function getShortID() {
     return shortid.generate()
+}
+export function getTimestamp(){
+    return new Date().getTime()
 }

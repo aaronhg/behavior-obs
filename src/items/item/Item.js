@@ -4,14 +4,12 @@ import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import { Icon } from 'antd'
-
 import ItemDetail from './ItemDetail'
 import * as itemActions from './ItemDetailRedux'
 
 class Item extends React.Component {
     render() {
-        return (<ItemDetail item={this.props.item} existNames={this.props.existNames} {...this.props.itemDetailActions} />)
+        return (<ItemDetail tags={this.props.tags} item={this.props.item} existNames={this.props.existNames} {...this.props.itemDetailActions} />)
     }
 }
 Item.propTypes = {
@@ -26,9 +24,10 @@ export default withRouter(connect((state) => {
     return {
         item: app.items.filter(i => i.id == id)[0] || {},
         existNames: app.items.map(i => i.name),
+        tags: app.tags,
     };
 }, (dispatch) => {
     return {
-        itemDetailActions: bindActionCreators(itemActions.itemDetailActions, dispatch),
+        itemDetailActions: bindActionCreators(itemActions, dispatch),
     };
 })(Item))
