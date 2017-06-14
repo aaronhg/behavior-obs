@@ -1,3 +1,6 @@
+### demo 
+  - go [Demo](./demo/) 
+
 ### header 會有三個 link : [Behobs] , [Items] , [tags]
 
 - 在 [Items] 管理 item
