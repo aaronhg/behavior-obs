@@ -14,7 +14,7 @@ class App extends React.Component {
     render() {
         return (<Provider store={store}>
             <ConnectedRouter history={history}>
-                <Main />
+                <Main store={store}/>
             </ConnectedRouter>
         </Provider>)
     }

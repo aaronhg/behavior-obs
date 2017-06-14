@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 class Tags extends React.Component {
     render() {
         let { tags,etags,items} = this.props
+        items = items.filter(i => !i.archived)
         let style ={paddingLeft:"5px"}
         return (<div>
             {tags.map((t)=><Link key={t.id} style={style} to={`/tags/t/${t.id}`}>{t.name}</Link>)}

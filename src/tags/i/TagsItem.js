@@ -11,7 +11,11 @@ class TagsETag extends React.Component {
             ref_tags : {this.props.item?this.props.item.ref_tags.map(t => <Link key={t.id} to={`/tags/t/${t.id}`}>{t.name}</Link>):""}
             <br />
             records :{this.props.records.map(r => {
-                return (<div key={r.id}><Link to={`/tags/r/${r.id}`}>{r.name}</Link>{JSON.stringify(r)}</div>)
+                return (<div key={r.id}>
+                    <Link to={`/tags/r/${r.id}`}>{r.name}</Link>{JSON.stringify(r)}
+                    <br />
+                    ref_etags : {r.ref_etags.map(e => <Link key={e.id} to={`/tags/e/${e.id}`}>{e.name}</Link>)}
+                </div>)
             })}
         </div>)
     }

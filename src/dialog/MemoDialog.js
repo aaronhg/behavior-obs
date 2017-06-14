@@ -23,12 +23,19 @@ class MemoDialog extends React.Component {
     }
     handleClose() {
         let { record } = this.props
-        this.props.saveRecord({
-            ...record,
-            memo: this.inputRefs.memo.value,
-            ref_etags: this.state.tags,
-        })
-        // todo : record.id is null
+        if (!record.id) {
+            record = {
+                ...record,
+                id: getShortID(),
+                star: false,
+                grade: 0,
+                memo: "",
+                update_at: getTimestamp(),
+            }
+        }
+        record.memo = this.inputRefs.memo.value
+        record.ref_etags = this.state.tags
+        this.props.saveRecord(record)
         this.props.closeMemoDialog()
     }
     handleDelete(i) {
@@ -77,7 +84,7 @@ class MemoDialog extends React.Component {
 export default withRouter(connect((state) => {
     return {
         ...state.dialog,
-        tags: state.app.etags,
+        tags:state.app.etags.map(e=>({id:e.id,name:e.name})),
     };
 }, (dispatch) => {
     return {

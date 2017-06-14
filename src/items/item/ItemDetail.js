@@ -33,24 +33,25 @@ class ItemDetail extends React.Component {
         // let { item: { ref_tags } } = this.props
         let ref_tags = props.item && props.item.ref_tags
         let bgcolor = props.item && props.item.bgcolor
-        let weight = props.item && props.item.weight
+        let weight = props.item && props.item.weight || 1
+        let wxx = weights.find(w => w.val == weight)
         this.state = {
             tags: ref_tags || [],
             color: bgcolor || "",
-            weight: weight || 1,
-            weightByCustom: false,
+            weight: weight,
+            useWeightInput: !wxx,
         }
     }
     handleSave() {
         let { item, existNames } = this.props
-        const { name, bgcolor, gtype, order } = this.inputRefs
+        const { name, bgcolor, gtype, order, weight } = this.inputRefs
         this.props.saveItem({
             name: name.value,
             bgcolor: bgcolor && bgcolor.hex || "",
             gtype: gtype.value,
             id: item.id || getShortID(),
             ref_tags: this.state.tags,
-            weight: this.state.weight,
+            weight: this.state.useWeightInput ? weight.value : this.state.weight,
             order: order.value,
         })
         this.props.gotoItems()
@@ -60,7 +61,7 @@ class ItemDetail extends React.Component {
         this.setState({ color })
     }
     setWeight(weight) {
-        this.setState({ weight })
+        this.setState({ weight,useWeightInput:false })
     }
     shouldComponentUpdate(nextProps, nextState) {
         return true
@@ -135,9 +136,11 @@ class ItemDetail extends React.Component {
                 </div>
                 <div className="small-6 columns">
                     {weights.map(w => {
-                        let clz = w.val == this.state.weight ? "button alert" : "button"
-                        return (<div key={w.val} className={clz} onClick={() => this.setWeight(w.val)}>{w.txt}</div>)
+                        let styles = w.val == this.state.weight ? { cursor: "pointer", color: "red", } : { cursor: "pointer", }
+                        return (<a style={styles} key={w.val} onClick={() => this.setWeight(w.val)}>{w.txt}</a>)
                     })}
+                    <input type="checkbox" checked={this.state.useWeightInput} onChange={(e)=>this.setState({useWeightInput:e.target.checked,weight:0})}></input>
+                    custom: <input type="number" ref={(ref) => this.inputRefs.weight = ref} placeholder="weight" defaultValue={values.weight} />
                 </div>
             </div>
             <div className="row">
@@ -148,10 +151,11 @@ class ItemDetail extends React.Component {
                     <input type="number" ref={(ref) => this.inputRefs.order = ref} placeholder="order" defaultValue={values.order} />
                 </div>
             </div>
-            <a className="button tiny" style={{
+            <a style={{
                 position: "absolute",
                 bottom: 0,
                 right: "20px",
+                cursor: "pointer",
             }} onClick={this.handleSave}> Save </a>
         </form>
         )

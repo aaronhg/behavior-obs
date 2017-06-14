@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import HomeItem from './HomeItem';
+import { Link } from 'react-router-dom'
 
 class List extends React.Component {
     // shouldComponentUpdate(nextProps, nextState){
@@ -17,7 +18,7 @@ class List extends React.Component {
                         let record = (es.length) ? es[0] : {}
                         return (<HomeItem date={this.props.date} key={item.id} openMemoDialog={this.props.openMemoDialog} saveRecord={this.props.saveRecord} item={item} record={record} />)
                     }) 
-                    : "no items"
+                    : <div> no items <Link to="/items/new" >click here</Link></div>
                 }
             </div>
         )

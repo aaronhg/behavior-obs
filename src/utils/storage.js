@@ -1,5 +1,5 @@
-import indexdb from './storages/indexdbSimple'
-// import other from './storges/other'
+// import indexdb from './storages/indexdbSimple'
+import lokijs from './storages/lokijs'
 
 // version
 // test
@@ -14,8 +14,8 @@ import indexdb from './storages/indexdbSimple'
 
 // export maxsize
 // setup and update
-var getAll = indexdb.getAll
-var saveAll = indexdb.saveAll
+var getAll = lokijs.getAll
+var saveAll = lokijs.saveAll
 
 // setup(setup)
 

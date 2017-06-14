@@ -13,7 +13,7 @@ import TagsTag from '../tags/t/TagsTag'
 import FontIcon from 'material-ui/FontIcon'
 import AppBar from 'material-ui/AppBar'
 import { loadData } from './MainRedux'
-// import storage from './utils/storage'
+import storage from '../utils/storage'
 import MemoDialog from '../dialog/MemoDialog'
 import FlatButton from 'material-ui/FlatButton'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
@@ -29,28 +29,29 @@ class Main extends React.Component {
         this.saveData = this.saveData.bind(this)
     }
     saveData() {
-        // let data = store.getState().app
-        // storage.saveAll(data).then(() => {
-        // })
+        let data = this.props.store.getState().app
+        storage.saveAll(data).then(() => {
+        })
     }
     componentDidMount() {
         // todo : init load
-        // storage.getAll().then((data) => {
-        //     store.dispatch(loadData(data))
-        // })
+        storage.getAll.then((data) => {
+            this.props.store.dispatch(loadData(data))
+        })
     }
     render() {
         return (<MuiThemeProvider muiTheme={getMuiTheme()}>
             <div>
                 <AppBar
-                    title={<span>Beh-obs</span>}
-                    showMenuIconButton={false}              
+                    title={<span>Behobs</span>}
+                    showMenuIconButton={false}
                     iconElementRight={<FlatButton label="Save" />}
+                    onRightIconButtonTouchTap={this.saveData}
                 />
                 <div>
-                    <Link to="/"><FontIcon className="material-icons">input</FontIcon></Link>
-                    <Link to="/items"><FontIcon className="material-icons">list</FontIcon></Link>
-                    <Link to="/tags"><FontIcon className="material-icons">insert_chart</FontIcon></Link>
+                    <Link to="/"><FontIcon className="material-icons">input</FontIcon>input</Link>
+                    <Link to="/items"><FontIcon className="material-icons">list</FontIcon>item list</Link>
+                    <Link to="/tags"><FontIcon className="material-icons">insert_chart</FontIcon>tags</Link>
                 </div>
                 <div>
                     <Route exact path="/" component={Home} />

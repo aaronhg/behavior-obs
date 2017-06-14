@@ -39,11 +39,17 @@ module.exports = {
                         //     libraryName: 'antd',
                         //     style: 'css'
                         // }]
-                        ],
+                    ],
                     presets: ['react', 'stage-0', 'es2015'],
                 }
             },
-            { test: /\.s?css$/, loader: "style-loader!css-loader!sass-loader"},
+            { test: /\.s?css$/, loader: "style-loader!css-loader!sass-loader" },
         ]
-    }
+    },
+    node: {
+        fs: 'empty',
+        net: 'empty',
+        tls: 'empty',
+        'crypto': 'empty'
+    },
 }

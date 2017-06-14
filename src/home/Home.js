@@ -9,18 +9,19 @@ import DayFilter from './DayFilter'
 import * as homeActions from './HomeRedux'
 import * as dialogActions from '../dialog/MemoDialogRedux'
 
-
 class Home extends React.Component {
     shouldComponentUpdate(nextProps, nextState) {
         return true
     }
     render() {
+        let {items} = this.props
+        items = items.filter(i => !i.archived)
         return (<div>
             {this.props.recordFilter.value}
             <DayFilter {...this.props.dayFilterActions} />
+            <br />
             <hr />
-            <List date={this.props.recordFilter.value} {...this.props.listActions} {...this.props.dialogActions} items={this.props.items} records={this.props.records} />
-
+            <List date={this.props.recordFilter.value} {...this.props.listActions} {...this.props.dialogActions} items={items} records={this.props.records} />
         </div>)
     }
 }

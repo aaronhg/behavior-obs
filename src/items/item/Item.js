@@ -24,7 +24,7 @@ export default withRouter(connect((state) => {
     return {
         item: app.items.filter(i => i.id == id)[0] || {},
         existNames: app.items.map(i => i.name),
-        tags: app.tags,
+        tags: app.tags.map(t=>({id:t.id,name:t.name})),
     };
 }, (dispatch) => {
     return {

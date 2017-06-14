@@ -1,4 +1,4 @@
-### header 會有三個 link : [Beh-obs] , [Items] , [tags]
+### header 會有三個 link : [Behobs] , [Items] , [tags]
 
 - 在 [Items] 管理 item
   - 可以從這裡編輯、及新增 item
@@ -6,7 +6,7 @@
   - 點 tag3 圓形，會到 [/tags/3] 看這個 tag 的每天資料及圖
   - 點 bgcolor 圓形，會到編輯頁，有點怪我知道
 
-- 在 [Beh-obs] 新增每天的資料
+- 在 [Behobs] 新增每天的資料
   - 上面可以切換日期
   - 前面有個星星，星星對使用者來說是特別的想特別記下；可以點 [memo] 寫一些 memo
 

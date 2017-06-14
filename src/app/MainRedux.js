@@ -11,8 +11,7 @@ function rootReducer(state, action) {
             let { data } = action.payload
             return {
                 ...state,
-                items: data.items,
-                records: data.records,
+                ...data,
             }
         default:
             return state

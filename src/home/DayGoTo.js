@@ -10,7 +10,7 @@ class DayGoTo extends React.Component {
         this.onSelectDay = this.onSelectDay.bind(this)
     }
     onSelectDay(n,date) {
-        console.log(date)
+        // console.log(date)
         // this.props.onSelectDay(date.diff(moment(), 'days'))
     }
     shouldComponentUpdate(nextProps, nextState) {

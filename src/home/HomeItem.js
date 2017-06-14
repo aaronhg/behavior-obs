@@ -11,7 +11,7 @@ import { Card } from 'material-ui/Card'
 class Star extends React.Component {
     render() {
         let { star } = this.props
-        let style = star ? { color: "red" } : null
+        let style = star ? { color: "red" ,cursor: "pointer"} : {cursor: "pointer"}
         return (<FontIcon className="material-icons" style={style} onClick={this.props.onStarChange} >star_outline</FontIcon>)
     }
 }
@@ -61,19 +61,24 @@ class HomeItem extends React.Component {
         return true
     }
     render() {
-        let { record, item, saveRecord } = this.props
+        let { record, item, saveRecord, date } = this.props
         let { grade, star, memo, ref_etags } = record
         let { name, type, bgcolor, id } = item
         let rootStyles = { backgroundColor: bgcolor, height: "60px", paddingTop: "4px", paddingBottom: "4px" }
-        let gradeStyles = { float: "right" }
+        let gradeStyles = { float: "right" ,cursor: "pointer",}
         let memoStyles = {
             color: (ref_etags && ref_etags.length) || memo ? "red" : null,
+            cursor: "pointer",
         }
         return (<Card style={rootStyles} >
             <Link to={`/tags/i/${id}`}>{name}</Link>
             <HomeItemGrade gradeStyles={gradeStyles} type={item.gtype} grade={grade} onGradeChange={(grade) => this.setGrade(grade)} />
             <Star star={star} onStarChange={() => this.setStar()} />
             <FontIcon className="material-icons" style={memoStyles} onClick={() => {
+                if (!record.id) {
+                    record.date = date
+                    record.ref_item_id = item.id
+                }
                 this.props.openMemoDialog(record)
             }
             }>insert_comment</FontIcon>

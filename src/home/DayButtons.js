@@ -1,9 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import FlatButton  from 'material-ui/FlatButton'
-const style = {
-  width: "40px",
-};
+const styles = {
+    paddingRight : 10,
+    cursor: "pointer",
+}
 class DayButtons extends React.Component {
     onSelectDay(day) {
         this.props.onSelectDay(day)
@@ -32,7 +32,7 @@ class DayButtons extends React.Component {
         ]
         return (<div style={this.props.rootStyles}>
             {dayrange.map((d) => {
-                return (<FlatButton style={style} key={d.val} label={d.txt} onClick={() => this.onSelectDay(d.val)} />)
+                return (<a style={styles} key={d.val} label={d.txt} onClick={() => this.onSelectDay(d.val)} >{d.txt}</a>)
             })}
         </div>)
     }

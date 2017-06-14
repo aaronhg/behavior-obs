@@ -9,11 +9,19 @@ class TagsETag extends React.Component {
             etag : {JSON.stringify(this.props.etag)}
             <br />
             records :{this.props.records.map(r => {
-                return (<div key={r.id}><Link to={`/tags/r/${r.id}`}>{r.name}</Link>{JSON.stringify(r)}</div>)
+                return (<div key={r.id}>
+                    <Link to={`/tags/r/${r.id}`}>{r.name}</Link>{JSON.stringify(r)}
+                    <br />
+                    ref_etags : {r.ref_etags.map(e => <Link key={e.id} to={`/tags/e/${e.id}`}>{e.name}</Link>)}
+                </div>)
             })}
             <br />
             items :{this.props.items.map(i => {
-                return (<div key={i.id}><Link to={`/tags/i/${i.id}`}>{i.name}</Link>{JSON.stringify(i)}</div>)
+                return (<div key={i.id}>
+                    <Link to={`/tags/i/${i.id}`}>{i.name}</Link>{JSON.stringify(i)}
+                    <br />
+                    ref_tags : {i.ref_tags.map(t => <Link key={t.id} to={`/tags/t/${t.id}`}>{t.name}</Link>)}
+                </div>)
             })}
         </div>)
     }
