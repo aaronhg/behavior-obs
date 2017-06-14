@@ -3,6 +3,9 @@ import PropTypes from 'prop-types'
 import FontIcon from 'material-ui/FontIcon';
 // var ItemGradeHOC = gradeType => WarpComponent => {
 // }
+let iconStyles = {
+  fontSize: '36px'
+};
 var gradeTypes = {
   "+-2": [
     { v: -2, gen: (props) => <FontIcon className="material-icons" {...props} >sentiment_very_dissatisfied</FontIcon> },
@@ -43,7 +46,7 @@ class ItemGrade extends React.Component {
       {grades.map((g) => (
         g.gen({
           key: g.v,
-          style: g.v === grade ? color : null,
+          style: g.v === grade ? {...iconStyles,...color} : iconStyles,
           onClick: this.toggle.bind(this, g.v),
         })
       ))}

@@ -40082,9 +40082,8 @@ var DayGoTo = function (_React$Component) {
     _createClass(DayGoTo, [{
         key: 'onSelectDay',
         value: function onSelectDay(n, date) {
-            console.log(date
+            // console.log(date)
             // this.props.onSelectDay(date.diff(moment(), 'days'))
-            );
         }
     }, {
         key: 'shouldComponentUpdate',
@@ -40230,6 +40229,8 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__(1);
@@ -40262,6 +40263,10 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+var iconStyles = {
+    fontSize: '36px'
+};
+
 var Star = function (_React$Component) {
     _inherits(Star, _React$Component);
 
@@ -40276,7 +40281,7 @@ var Star = function (_React$Component) {
         value: function render() {
             var star = this.props.star;
 
-            var style = star ? { color: "red", cursor: "pointer" } : { cursor: "pointer" };
+            var style = star ? _extends({}, iconStyles, { color: "red", cursor: "pointer" }) : _extends({}, iconStyles, { cursor: "pointer" });
             return _react2.default.createElement(
                 _FontIcon2.default,
                 { className: 'material-icons', style: style, onClick: this.props.onStarChange },
@@ -40373,10 +40378,10 @@ var HomeItem = function (_React$Component2) {
 
             var rootStyles = { backgroundColor: bgcolor, height: "60px", paddingTop: "4px", paddingBottom: "4px" };
             var gradeStyles = { float: "right", cursor: "pointer" };
-            var memoStyles = {
+            var memoStyles = _extends({}, iconStyles, {
                 color: ref_etags && ref_etags.length || memo ? "red" : null,
                 cursor: "pointer"
-            };
+            });
             return _react2.default.createElement(
                 _Card.Card,
                 { style: rootStyles },
@@ -40460,6 +40465,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 // var ItemGradeHOC = gradeType => WarpComponent => {
 // }
+var iconStyles = {
+  fontSize: '36px'
+};
 var gradeTypes = {
   "+-2": [{ v: -2, gen: function gen(props) {
       return _react2.default.createElement(
@@ -40572,7 +40580,7 @@ var ItemGrade = function (_React$Component) {
         grades.map(function (g) {
           return g.gen({
             key: g.v,
-            style: g.v === grade ? color : null,
+            style: g.v === grade ? _extends({}, iconStyles, color) : iconStyles,
             onClick: _this2.toggle.bind(_this2, g.v)
           });
         })

@@ -7,11 +7,13 @@ import HomeItemGrade from './HomeItemGrade'
 import FontIcon from 'material-ui/FontIcon';
 import { getShortID, getTimestamp } from '../utils/id'
 import { Card } from 'material-ui/Card'
-
+let iconStyles = {
+  fontSize: '36px'
+};
 class Star extends React.Component {
     render() {
         let { star } = this.props
-        let style = star ? { color: "red" ,cursor: "pointer"} : {cursor: "pointer"}
+        let style = star ? {...iconStyles, color: "red" ,cursor: "pointer"} : {...iconStyles,cursor: "pointer"}
         return (<FontIcon className="material-icons" style={style} onClick={this.props.onStarChange} >star_outline</FontIcon>)
     }
 }
@@ -67,6 +69,7 @@ class HomeItem extends React.Component {
         let rootStyles = { backgroundColor: bgcolor, height: "60px", paddingTop: "4px", paddingBottom: "4px" }
         let gradeStyles = { float: "right" ,cursor: "pointer",}
         let memoStyles = {
+            ...iconStyles,
             color: (ref_etags && ref_etags.length) || memo ? "red" : null,
             cursor: "pointer",
         }
