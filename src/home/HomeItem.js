@@ -8,15 +8,8 @@ import FontIcon from 'material-ui/FontIcon';
 import { getShortID, getTimestamp } from '../utils/id'
 import { Card } from 'material-ui/Card'
 let iconStyles = {
-  fontSize: '36px'
+    fontSize: '36px'
 };
-class Star extends React.Component {
-    render() {
-        let { star } = this.props
-        let style = star ? {...iconStyles, color: "red" ,cursor: "pointer"} : {...iconStyles,cursor: "pointer"}
-        return (<FontIcon className="material-icons" style={style} onClick={this.props.onStarChange} >star_outline</FontIcon>)
-    }
-}
 class HomeItem extends React.Component {
     constructor() {
         super()
@@ -67,16 +60,17 @@ class HomeItem extends React.Component {
         let { grade, star, memo, ref_etags } = record
         let { name, type, bgcolor, id } = item
         let rootStyles = { backgroundColor: bgcolor, height: "60px", paddingTop: "4px", paddingBottom: "4px" }
-        let gradeStyles = { float: "right" ,cursor: "pointer",}
+        let gradeStyles = { float: "right", cursor: "pointer" }
         let memoStyles = {
             ...iconStyles,
             color: (ref_etags && ref_etags.length) || memo ? "red" : null,
             cursor: "pointer",
         }
+        let starStyles = { ...iconStyles, color: star ? "red" : null, cursor: "pointer" }
         return (<Card style={rootStyles} >
             <Link to={`/tags/i/${id}`}>{name}</Link>
             <HomeItemGrade gradeStyles={gradeStyles} type={item.gtype} grade={grade} onGradeChange={(grade) => this.setGrade(grade)} />
-            <Star star={star} onStarChange={() => this.setStar()} />
+            <FontIcon className="material-icons" style={starStyles} onClick={this.setStar} >star_outline</FontIcon>)
             <FontIcon className="material-icons" style={memoStyles} onClick={() => {
                 if (!record.id) {
                     record.date = date

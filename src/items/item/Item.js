@@ -9,22 +9,21 @@ import * as itemActions from './ItemDetailRedux'
 
 class Item extends React.Component {
     render() {
-        return (<ItemDetail tags={this.props.tags} item={this.props.item} existNames={this.props.existNames} {...this.props.itemDetailActions} />)
+        return (<ItemDetail goBack={this.props.goBack} tags={this.props.tags} item={this.props.item} existNames={this.props.existNames} {...this.props.itemDetailActions} />)
     }
 }
 Item.propTypes = {
     // item: PropTypes.object,
     // existNames: PropTypes.arrayOf(PropTypes.object),
 }
-export default withRouter(connect((state) => {
-    // state.router.location.pathname = "/items/1"
-    let pathname = state.router.location.pathname
-    let id = pathname.split("/")[2]
+export default withRouter(connect((state,ownProps) => {
+    let id = ownProps.match.params.id
     let app = state.app
     return {
         item: app.items.filter(i => i.id == id)[0] || {},
         existNames: app.items.map(i => i.name),
         tags: app.tags.map(t=>({id:t.id,name:t.name})),
+        goBack: ownProps.history.goBack,
     };
 }, (dispatch) => {
     return {

@@ -68,6 +68,7 @@ class MemoDialog extends React.Component {
                     etags:<ReactTags
                         tags={this.state.tags}
                         minQueryLength={1}
+                        autofocus={false}
                         suggestions={this.props.tags}
                         handleDelete={this.handleDelete.bind(this)}
                         handleAddition={this.handleAddition.bind(this)}

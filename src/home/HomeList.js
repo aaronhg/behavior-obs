@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import HomeItem from './HomeItem';
 import { Link } from 'react-router-dom'
-
+import AddButton from '../items/AddButton'
 class List extends React.Component {
     // shouldComponentUpdate(nextProps, nextState){
         
@@ -20,6 +20,7 @@ class List extends React.Component {
                     }) 
                     : <div> no items <Link to="/items/new" >click here</Link></div>
                 }
+            <AddButton />
             </div>
         )
         // todo : lazy load

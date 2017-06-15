@@ -54,7 +54,7 @@ class ItemDetail extends React.Component {
             weight: this.state.useWeightInput ? weight.value : this.state.weight,
             order: order.value,
         })
-        this.props.gotoItems()
+        this.props.goBack()
     }
     setColor(color) {
         this.inputRefs.bgcolor = color
@@ -80,7 +80,7 @@ class ItemDetail extends React.Component {
     render() {
         let { item } = this.props
         let values = item || itemDefaultValue
-        return (<form>
+        return (<form style={{position:"relative"}}>
             <div className="row">
                 <div className="small-3 columns">
                     <label className="text-right middle">name:</label>
@@ -124,6 +124,7 @@ class ItemDetail extends React.Component {
                         tags={this.state.tags}
                         suggestions={this.props.tags}
                         minQueryLength={1}
+                        autofocus={false}
                         handleDelete={this.handleDelete.bind(this)}
                         handleAddition={this.handleAddition.bind(this)}
                         allowNew={true}
@@ -153,7 +154,7 @@ class ItemDetail extends React.Component {
             </div>
             <a style={{
                 position: "absolute",
-                bottom: 0,
+                top: "20px",
                 right: "20px",
                 cursor: "pointer",
             }} onClick={this.handleSave}> Save </a>
@@ -161,6 +162,7 @@ class ItemDetail extends React.Component {
         )
 
         // todo : 
+        // 用 chip 取代 reacttags
         // <input type="checkbox" readOnly="readOnly" value={this.state.weightByCustom} />custom:<input onChange={(v)=>this.setWeight(v)} defaultValue={values.weight} />
         // <FontIcon type="minus-circle-o" />
         // <FontIcon type="minus"  />

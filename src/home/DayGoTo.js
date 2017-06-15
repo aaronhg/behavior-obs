@@ -1,25 +1,33 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-
-// import moment from 'moment'
+import FontIcon from 'material-ui/FontIcon'
+import moment from 'moment'
 import DatePicker from 'material-ui/DatePicker';
-
+const styles = {
+    paddingRight : 10,
+    cursor: "pointer",
+}
 class DayGoTo extends React.Component {
     constructor() {
         super()
-        this.onSelectDay = this.onSelectDay.bind(this)
+        this.handleChange = this.handleChange.bind(this)
     }
-    onSelectDay(n,date) {
+    handleChange(event,date) {
         // console.log(date)
-        // this.props.onSelectDay(date.diff(moment(), 'days'))
+        this.props.onSelectDay(moment(date).format("YYYY/MM/DD"))
     }
     shouldComponentUpdate(nextProps, nextState) {
         return true
     }
     render() {
-        return (<div style={this.props.rootStyles}>
-            <DatePicker autoOk={true} onChange={this.onSelectDay} />
-        </div>)
+        // style={this.props.rootStyles}
+        return (<div>
+                <FontIcon style={styles} className="material-icons" onClick={()=>this.refs.dp.openDialog()}>date_range</FontIcon>
+                <DatePicker ref="dp" style={{display:"none"}}
+                    onChange={this.handleChange}
+                    autoOk={true} />
+                    </div>
+        )
     }
 }
 DayGoTo.propTypes = {

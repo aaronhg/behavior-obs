@@ -10,6 +10,9 @@ export function filterCreator(date) {
 //     })
 // }
 export function day2date(day){
+    if (typeof day == "string"){
+        return day
+    }
     let d = new Date()
     d.setHours(day * 24 + 0, 0, 0, 0)
     return moment(d).format("YYYY/MM/DD")

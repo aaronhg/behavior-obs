@@ -8,7 +8,6 @@ import List from './HomeList'
 import DayFilter from './DayFilter'
 import * as homeActions from './HomeRedux'
 import * as dialogActions from '../dialog/MemoDialogRedux'
-
 class Home extends React.Component {
     shouldComponentUpdate(nextProps, nextState) {
         return true
@@ -20,7 +19,7 @@ class Home extends React.Component {
             {this.props.recordFilter.value}
             <DayFilter {...this.props.dayFilterActions} />
             <br />
-            <hr />
+            <hr  />
             <List date={this.props.recordFilter.value} {...this.props.listActions} {...this.props.dialogActions} items={items} records={this.props.records} />
         </div>)
     }

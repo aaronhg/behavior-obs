@@ -20,23 +20,41 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme'
 var injectTapEventPlugin = require("react-tap-event-plugin")
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 injectTapEventPlugin();
-
+import Snackbar from 'material-ui/Snackbar'
 import { BottomNavigation, BottomNavigationItem } from 'material-ui/BottomNavigation'
 import Paper from 'material-ui/Paper'
 class Main extends React.Component {
     constructor() {
         super()
         this.saveData = this.saveData.bind(this)
+        this.handleRequestClose = this.handleRequestClose.bind(this)
+        this.state = {
+            snackbarOpen : false,
+            snackbarMessage:"",
+        }
     }
     saveData() {
         let data = this.props.store.getState().app
         storage.saveAll(data).then(() => {
+            this.setState({
+                snackbarOpen: true,
+                snackbarMessage:"Saved",
+            });
         })
     }
+    handleRequestClose () {
+        this.setState({
+            snackbarOpen: false,
+        });
+    };
     componentDidMount() {
         // todo : init load
         storage.getAll.then((data) => {
             this.props.store.dispatch(loadData(data))
+            this.setState({
+                snackbarOpen: true,
+                snackbarMessage:"Loaded",
+            });
         })
     }
     render() {
@@ -63,6 +81,12 @@ class Main extends React.Component {
                     <Route path="/tags/t/:id" component={TagsTag} />
                 </div>
                 <MemoDialog />
+                <Snackbar
+                    open={this.state.snackbarOpen}
+                    message={this.state.snackbarMessage}
+                    autoHideDuration={4000}
+                    onRequestClose={this.handleRequestClose}
+                />
             </div>
         </MuiThemeProvider>)
         // <FontIcon style={{ fontSize: "48px" }} onClick={this.saveData} type="save" />

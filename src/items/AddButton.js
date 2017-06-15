@@ -7,15 +7,17 @@ import ContentAdd from 'material-ui/svg-icons/content/add';
 
 class AddButton extends React.Component {
     render() {
-        return (<div>
+        return (
             <Link className="button tiny" style={{
                 position: "absolute",
-                bottom: 0,
+                bottom: "20px",
                 right: "20px",
-            }} to="/items/new"><FloatingActionButton>
-      <ContentAdd />
-    </FloatingActionButton></Link>
-        </div>)
+            }} to="/items/new">
+                <FloatingActionButton>
+                    <ContentAdd />
+                </FloatingActionButton>
+            </Link>
+        )
     }
 }
 export default AddButton

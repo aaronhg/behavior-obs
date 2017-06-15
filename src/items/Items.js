@@ -4,7 +4,6 @@ import AddButton from './AddButton'
 import { connect } from 'react-redux'
 import { Link, withRouter } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
-
 import * as itemActions from './item/ItemDetailRedux'
 var genItem = ([i,that]) => {
     return (<div key={i.id}>
@@ -28,7 +27,7 @@ class Items extends React.Component {
         let i2s = items.filter(i => i.archived)
         return (<div>
             {i1s.map(i=>[i,this],this).map(genItem)}
-            <hr />
+            <hr  />
             {i2s.map(i=>[i,this],this).map(genItem)}
             <AddButton />
         </div>)
